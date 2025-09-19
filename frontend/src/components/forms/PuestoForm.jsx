@@ -6,7 +6,8 @@ const PuestoForm = ({
   savePuesto, 
   loading, 
   editingId, 
-  setCurrentView 
+  setCurrentView,
+  departamentos = []
 }) => (
   <div style={{
     minHeight: '100vh',
@@ -84,6 +85,41 @@ const PuestoForm = ({
               boxSizing: 'border-box'
             }}
           />
+        </div>
+
+        <div style={{ marginBottom: '30px' }}>
+          <label style={{
+            display: 'block',
+            marginBottom: '8px',
+            fontWeight: '600',
+            color: '#374151'
+          }}>
+            Departamento <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <select
+            id="departamento_id"
+            name="departamento_id"
+            value={puestoForm.departamento_id || ''}
+            onChange={handlePuestoInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '12px 16px',
+              border: '1px solid #D1D5DB',
+              borderRadius: '10px',
+              fontSize: '0.9rem',
+              outline: 'none',
+              boxSizing: 'border-box',
+              backgroundColor: 'white'
+            }}
+          >
+            <option value="">Seleccione un departamento</option>
+            {departamentos.map((departamento) => (
+              <option key={departamento.id} value={departamento.id}>
+                {departamento.nombre}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div style={{

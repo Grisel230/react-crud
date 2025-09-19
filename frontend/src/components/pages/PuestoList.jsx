@@ -14,7 +14,7 @@ const PuestoList = ({
   showAllPuestos,
   clearSearch
 }) => {
-  // Determinar qué datos mostrar
+  
   const displayData = filteredPuestos.length > 0 ? filteredPuestos : puestos;
   const isFiltered = filteredPuestos.length > 0;
 
@@ -219,6 +219,15 @@ const PuestoList = ({
                     fontSize: '0.9rem',
                     textTransform: 'uppercase'
                   }}>
+                    DEPARTAMENTO
+                  </th>
+                  <th style={{
+                    padding: '15px',
+                    textAlign: 'left',
+                    fontWeight: 'bold',
+                    fontSize: '0.9rem',
+                    textTransform: 'uppercase'
+                  }}>
                     ACCIONES
                   </th>
                 </tr>
@@ -243,6 +252,14 @@ const PuestoList = ({
                       fontWeight: '500'
                     }}>
                       {puesto.nombre}
+                    </td>
+                    <td style={{
+                      padding: '15px',
+                      color: '#1F2937',
+                      fontSize: '0.9rem',
+                      fontWeight: '500'
+                    }}>
+                      {puesto.departamento_nombre || 'Sin departamento'}
                     </td>
                     <td style={{
                       padding: '15px'

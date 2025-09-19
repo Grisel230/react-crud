@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Departamento;
+use App\DTOs\DepartamentoDTO;
 use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
@@ -14,7 +15,8 @@ class DepartamentoController extends Controller
     public function index()
     {
         $departamentos = Departamento::all();
-        return response()->json($departamentos);
+        $departamentosDTO = $departamentos->map(fn($departamento) => DepartamentoDTO::fromModel($departamento));
+        return response()->json($departamentosDTO->map(fn($dto) => $dto->toArray()));
     }
 
     /**
@@ -30,7 +32,8 @@ class DepartamentoController extends Controller
             ]);
 
             $departamento = Departamento::create($request->all());
-            return response()->json($departamento, 201);
+            $departamentoDTO = DepartamentoDTO::fromModel($departamento);
+            return response()->json($departamentoDTO->toArray(), 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Error al crear departamento',
@@ -45,7 +48,8 @@ class DepartamentoController extends Controller
     public function show(string $id)
     {
         $departamento = Departamento::findOrFail($id);
-        return response()->json($departamento);
+        $departamentoDTO = DepartamentoDTO::fromModel($departamento);
+        return response()->json($departamentoDTO->toArray());
     }
 
     /**
@@ -61,7 +65,8 @@ class DepartamentoController extends Controller
 
         $departamento = Departamento::findOrFail($id);
         $departamento->update($request->all());
-        return response()->json($departamento);
+        $departamentoDTO = DepartamentoDTO::fromModel($departamento);
+        return response()->json($departamentoDTO->toArray());
     }
 
     /**

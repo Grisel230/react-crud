@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from './services/api';
 import './styles/animations.css';
 
@@ -43,7 +44,8 @@ function App() {
     subcuenta: ''
   });
   const [puestoForm, setPuestoForm] = useState({
-    nombre: ''
+    nombre: '',
+    departamento_id: ''
   });
   const [editingId, setEditingId] = useState(null);
 
@@ -153,7 +155,8 @@ function App() {
       
       // Limpiar formulario
       setPuestoForm({
-        nombre: ''
+        nombre: '',
+        departamento_id: ''
       });
       setEditingId(null);
       // Recargar datos y cambiar vista
@@ -210,7 +213,8 @@ function App() {
   // Editar puesto
   const editPuesto = (puesto) => {
     setPuestoForm({
-      nombre: puesto.nombre
+      nombre: puesto.nombre,
+      departamento_id: puesto.departamento_id || ''
     });
     setEditingId(puesto.id);
     setCurrentView('puesto-form');
@@ -224,7 +228,8 @@ function App() {
       subcuenta: ''
     });
     setPuestoForm({
-      nombre: ''
+      nombre: '',
+      departamento_id: ''
     });
     setEditingId(null);
     setError(null);
@@ -387,6 +392,7 @@ function App() {
           loading={loading}
           editingId={editingId}
           setCurrentView={setCurrentView}
+          departamentos={departamentos}
         />;
       default:
         return <Home setCurrentView={setCurrentView} />;

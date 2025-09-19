@@ -14,7 +14,7 @@ const DepartamentoList = ({
   showAllDepartamentos,
   clearSearch
 }) => {
-  // Determinar qué datos mostrar
+  
   const displayData = filteredDepartamentos.length > 0 ? filteredDepartamentos : departamentos;
   const isFiltered = filteredDepartamentos.length > 0;
 
